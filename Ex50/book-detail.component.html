@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Book Details</h2>
+
+  <div *ngIf="errMessage" class="alert alert-danger">
+    {{errMessage}}
+  </div>
+
+  <div *ngIf="book" class="book-detail">
+    <div class="detail-card">
+      <div class="book-image">
+        <img [src]="'http://localhost:3001/image/' + book.Image" 
+             alt="Book cover"
+             onerror="this.src='assets/default-book.png'">
+      </div>
+
+      <div class="book-info">
+        <div class="info-item">
+          <label>Book ID:</label>
+          <span>{{book.BookId}}</span>
+        </div>
+
+        <div class="info-item">
+          <label>Book Name:</label>
+          <span>{{book.BookName}}</span>
+        </div>
+
+        <div class="info-item">
+          <label>Author:</label>
+          <span>{{book.Author || 'N/A'}}</span>
+        </div>
+
+        <div class="info-item">
+          <label>Price:</label>
+          <span class="price">${{book.Price}}</span>
+        </div>
+
+        <div class="info-item">
+          <label>Publish Date:</label>
+          <span>{{book.Publish_Date || 'N/A'}}</span>
+        </div>
+
+        <div class="info-item full-width">
+          <label>Description:</label>
+          <span class="description">{{book.Description || 'No description available'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button (click)="goBack()" class="btn btn-secondary">Back to List</button>
+    </div>
+  </div>
+</div>

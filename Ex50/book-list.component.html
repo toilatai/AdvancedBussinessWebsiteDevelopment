@@ -1,0 +1,47 @@
+<div class="container">
+  <h1>QUẢN LÝ THÔNG TIN SÁCH</h1>
+  <button (click)="createNew()" class="btn btn-success">Create New</button>
+
+  <div *ngIf="errMessage" class="alert alert-danger">
+    {{errMessage}}
+  </div>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Tenxanh</th>
+        <th>Glaaxh</th>
+        <th>Mota</th>
+        <th>AmBia</th>
+        <th>NgayXB</th>
+        <th>SoLuong</th>
+        <th>MacD</th>
+        <th>MaKB</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{book.BookName}}</td>
+        <td>{{book.BookId}}</td>
+        <td>{{book.Description}}</td>
+        <td>
+          <img [src]="'http://localhost:3001/image/' + book.Image" 
+               width="50px" height="50px" alt="Book cover"
+               onerror="this.src='assets/default-book.png'">
+        </td>
+        <td>{{book.Publish_Date}}</td>
+        <td>{{book.Price}}</td>
+        <td>
+          <button (click)="edit(book.BookId)" class="btn btn-primary btn-sm">Edit</button>
+        </td>
+        <td>
+          <button (click)="details(book.BookId)" class="btn btn-info btn-sm">Details</button>
+        </td>
+        <td>
+          <button (click)="delete(book.BookId)" class="btn btn-danger btn-sm">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
