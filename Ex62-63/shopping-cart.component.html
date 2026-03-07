@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="header">
+    <h1>Shopping Cart System</h1>
+    <div class="nav-buttons">
+      <button class="btn btn-nav" [class.active]="currentView === 'products'" (click)="switchView('products')">
+        Products
+      </button>
+      <button class="btn btn-nav" [class.active]="currentView === 'cart'" (click)="switchView('cart')">
+        Cart ({{ getCartCount() }})
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="message" class="alert">{{ message }}</div>
+
+  <!-- Products View -->
+  <div *ngIf="currentView === 'products'" class="products-view">
+    <h2>Available Products</h2>
+    <div class="products-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <div class="product-image">
+          <div class="placeholder-image">
+            <span>{{ product.name.substring(0,1).toUpperCase() }}</span>
+          </div>
+        </div>
+        <div class="product-info">
+          <h3>{{ product.name }}</h3>
+          <p class="description">{{ product.description }}</p>
+          <p class="price">${{ product.price }}</p>
+          <div class="rating">
+            <span *ngFor="let i of [1,2,3,4,5]" class="star" [class.filled]="i <= product.rating">★</span>
+          </div>
+          <button class="btn btn-add-cart" (click)="addToCart(product)">ADD TO CART</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart View -->
+  <div *ngIf="currentView === 'cart'" class="cart-view">
+    <h2>Shopping Cart</h2>
+    <div *ngIf="cart.length === 0" class="empty-cart">
+      <p>Your cart is empty</p>
+    </div>
+
+    <div *ngIf="cart.length > 0" class="cart-table-container">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Remove</th>
+            <th>SKU</th>
+            <th>Image</th>
+            <th>Product(s)</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart">
+            <td>
+              <input type="checkbox" (change)="removeFromCart(item.productId)" />
+            </td>
+            <td>{{ item.productId }}</td>
+            <td>
+              <div class="cart-item-image">
+                <img src="assets/images/product.png" alt="{{ item.name }}" />
+              </div>
+            </td>
+            <td>{{ item.name }}</td>
+            <td>${{ item.price }}</td>
+            <td>
+              <input type="number" [value]="item.quantity" 
+                     (change)="updateQuantity(item.productId, $any($event.target).value)" 
+                     min="1" class="qty-input" />
+            </td>
+            <td>${{ (item.price * item.quantity).toFixed(2) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cart-actions">
+        <button class="btn btn-update" (click)="loadCart()">Update shopping cart</button>
+        <button class="btn btn-continue" (click)="switchView('products')">Continue shopping</button>
+        <button class="btn btn-checkout" (click)="checkout()">Checkout</button>
+      </div>
+
+      <div class="cart-summary">
+        <h3>Cart Summary</h3>
+        <p><strong>Total Items:</strong> {{ cart.length }}</p>
+        <p><strong>Total Price:</strong> <span class="total-price">${{ total.toFixed(2) }}</span></p>
+      </div>
+    </div>
+  </div>
+</div>
