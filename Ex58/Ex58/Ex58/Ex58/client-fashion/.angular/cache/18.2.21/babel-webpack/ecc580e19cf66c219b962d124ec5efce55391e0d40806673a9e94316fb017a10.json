@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { FashionHomeComponent } from './components/fashion-home/fashion-home.component';\nexport const routes = [{\n  path: '',\n  component: FashionHomeComponent\n}, {\n  path: '**',\n  redirectTo: ''\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"export default new WeakMap();","map":{"version":3,"names":["WeakMap"],"sources":["C:/Users/LENOVO/OneDrive/Desktop/CODEDEMO/admin-fashion/node_modules/quill/core/instances.js"],"sourcesContent":["export default new WeakMap();\n"],"mappings":"AAAA,eAAe,IAAIA,OAAO,CAAC,CAAC","ignoreList":[]},"metadata":{},"sourceType":"module","externalDependencies":[]}
